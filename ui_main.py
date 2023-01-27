@@ -117,6 +117,15 @@ class Ui_MainWindow(object):
         self.labelHeaderA.setObjectName("labelHeaderA")
         self.verticalLayoutA.addWidget(self.labelHeaderA)
 
+        # Подзаголовок матрицы А
+        self.labelsubHeaderA = QtWidgets.QLabel(self.centralwidget)
+        sizePolicy.setHeightForWidth(self.labelsubHeaderA.sizePolicy().hasHeightForWidth())
+        self.labelsubHeaderA.setSizePolicy(sizePolicy)
+        self.labelsubHeaderA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelsubHeaderA.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelsubHeaderA.setObjectName("labelsubHeaderA")
+        self.verticalLayoutA.addWidget(self.labelsubHeaderA)
+
         # Сетка Layout
         self.gridLayout2_a = QtWidgets.QGridLayout()
         self.gridLayout2_a.setObjectName("gridLayout2_a")
@@ -138,8 +147,15 @@ class Ui_MainWindow(object):
         self.pushButtonMultiply_a.setObjectName("pushButtonMultiply_a")
         self.horizontalLayout_4.addWidget(self.pushButtonMultiply_a)
 
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem3)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem2)
+
+        # Текст Ограничение значений множителя
+        self.labelmulvaluelimitA = QtWidgets.QLabel(self.centralwidget)
+        self.labelmulvaluelimitA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelmulvaluelimitA.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelmulvaluelimitA.setObjectName("labelmulvaluelimitA")
+        self.horizontalLayout_4.addWidget(self.labelmulvaluelimitA)
 
         # Ввод множителя
         self.inputMultiply_a = QtWidgets.QLineEdit(self.centralwidget)
@@ -163,7 +179,9 @@ class Ui_MainWindow(object):
         self.inputMultiply_a.setObjectName("inputMultiply_a")
         self.inputMultiply_a.clear()
         self.inputMultiply_a.setText("1.0")
-        self.inputMultiply_a.textChanged.connect(lambda: self.checkfloatinput(self.inputMultiply_a, -9.9, 9.9))
+        self.inputMultiply_a.setMaxLength(4)
+        self.inputMultiply_a.returnPressed.connect(lambda: self.checkfloatinput(self.inputMultiply_a, -9.9, 9.9))
+        self.inputMultiply_a.editingFinished.connect(lambda: self.checkfloatinput(self.inputMultiply_a, -9.9, 9.9))
         self.horizontalLayout_4.addWidget(self.inputMultiply_a)
         self.gridLayout2_a.addLayout(self.horizontalLayout_4, 2, 1, 1, 1)
 
@@ -330,6 +348,13 @@ class Ui_MainWindow(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
 
+        # Текст Ограничение значений множителя
+        self.labelpowvaluelimitA = QtWidgets.QLabel(self.centralwidget)
+        self.labelpowvaluelimitA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelpowvaluelimitA.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelpowvaluelimitA.setObjectName("labelpowvaluelimitA")
+        self.horizontalLayout_2.addWidget(self.labelpowvaluelimitA)
+
         # Ввести показатель степени
         self.inputPower_a = QtWidgets.QLineEdit(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -356,19 +381,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.inputPower_a)
         self.inputPower_a.clear()
         self.inputPower_a.setText("1")
-        self.inputPower_a.textChanged.connect(lambda: self.checkintinput(self.inputPower_a, -9, 9))
+        self.inputPower_a.setMaxLength(2)
+        self.inputPower_a.returnPressed.connect(lambda: self.checkintinput(self.inputPower_a, -9, 9))
+        self.inputPower_a.editingFinished.connect(lambda: self.checkintinput(self.inputPower_a, -9, 9))
         self.gridLayout2_a.addLayout(self.horizontalLayout_2, 1, 1, 1, 1)
         self.verticalLayoutA.addLayout(self.gridLayout2_a)
         self.horizontalLayoutAB.addLayout(self.verticalLayoutA)
 
-        spacerItem5 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayoutAB.addItem(spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayoutAB.addItem(spacerItem6)
 
         # Вертикальный Layout
         self.verticalLayoutButtonsAB = QtWidgets.QVBoxLayout()
         self.verticalLayoutButtonsAB.setObjectName("verticalLayoutButtonsAB")
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayoutButtonsAB.addItem(spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayoutButtonsAB.addItem(spacerItem7)
 
         # Кнопка Сложить матрицы
         self.pushButtonAdd = QtWidgets.QPushButton(self.centralwidget)
@@ -385,11 +412,11 @@ class Ui_MainWindow(object):
         self.pushButtonMul.setObjectName("pushButtonMul")
         self.verticalLayoutButtonsAB.addWidget(self.pushButtonMul)
 
-        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayoutButtonsAB.addItem(spacerItem7)
+        spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayoutButtonsAB.addItem(spacerItem8)
         self.horizontalLayoutAB.addLayout(self.verticalLayoutButtonsAB)
-        spacerItem8 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayoutAB.addItem(spacerItem8)
+        spacerItem9 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayoutAB.addItem(spacerItem9)
 
         # Вертикальный Layout
         self.verticalLayoutB = QtWidgets.QVBoxLayout()
@@ -406,6 +433,15 @@ class Ui_MainWindow(object):
         self.labelHeaderB.setAlignment(QtCore.Qt.AlignCenter)
         self.labelHeaderB.setObjectName("labelHeaderB")
         self.verticalLayoutB.addWidget(self.labelHeaderB)
+
+        # Подзаголовок матрицы B
+        self.labelsubHeaderB = QtWidgets.QLabel(self.centralwidget)
+        sizePolicy.setHeightForWidth(self.labelsubHeaderA.sizePolicy().hasHeightForWidth())
+        self.labelsubHeaderB.setSizePolicy(sizePolicy)
+        self.labelsubHeaderB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelsubHeaderB.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelsubHeaderB.setObjectName("labelsubHeaderB")
+        self.verticalLayoutB.addWidget(self.labelsubHeaderB)
 
         # Сетка Layout
         self.gridLayout2_b = QtWidgets.QGridLayout()
@@ -528,8 +564,16 @@ class Ui_MainWindow(object):
                                              "margin-bottom: 2px")
         self.pushButtonPower_b.setObjectName("pushButtonPower_b")
         self.horizontalLayout_5.addWidget(self.pushButtonPower_b)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem11)
+
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem10)
+
+        # Текст Ограничение значений показателя степени
+        self.labelpowvaluelimitB = QtWidgets.QLabel(self.centralwidget)
+        self.labelpowvaluelimitB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelpowvaluelimitB.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelpowvaluelimitB.setObjectName("labelpowvaluelimitB")
+        self.horizontalLayout_5.addWidget(self.labelpowvaluelimitB)
 
         # Ввод показателя степени
         self.inputPower_b = QtWidgets.QLineEdit(self.centralwidget)
@@ -553,7 +597,9 @@ class Ui_MainWindow(object):
         self.inputPower_b.setObjectName("inputPower_b")
         self.inputPower_b.clear()
         self.inputPower_b.setText("1")
-        self.inputPower_b.textChanged.connect(lambda: self.checkintinput(self.inputPower_b, -9, 9))
+        self.inputPower_b.setMaxLength(2)
+        self.inputPower_b.returnPressed.connect(lambda: self.checkintinput(self.inputPower_b, -9, 9))
+        self.inputPower_b.editingFinished.connect(lambda: self.checkintinput(self.inputPower_b, -9, 9))
         self.horizontalLayout_5.addWidget(self.inputPower_b)
         self.gridLayout2_b.addLayout(self.horizontalLayout_5, 1, 1, 1, 1)
 
@@ -586,8 +632,16 @@ class Ui_MainWindow(object):
                                                 "margin-bottom: 2px")
         self.pushButtonMultiply_b.setObjectName("pushButtonMultiply_b")
         self.horizontalLayout_6.addWidget(self.pushButtonMultiply_b)
+
         spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem12)
+
+        # Текст Ограничение значений показателя степени
+        self.labelmulvaluelimitB = QtWidgets.QLabel(self.centralwidget)
+        self.labelmulvaluelimitB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelmulvaluelimitB.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelmulvaluelimitB.setObjectName("labelmulvaluelimitB")
+        self.horizontalLayout_6.addWidget(self.labelmulvaluelimitB)
 
         # Ввод множителя
         self.inputMultiply_b = QtWidgets.QLineEdit(self.centralwidget)
@@ -611,7 +665,9 @@ class Ui_MainWindow(object):
         self.inputMultiply_b.setObjectName("inputMultiply_b")
         self.inputMultiply_b.clear()
         self.inputMultiply_b.setText("1.0")
-        self.inputMultiply_b.textChanged.connect(lambda: self.checkfloatinput(self.inputMultiply_b, -9.9, 9.9))
+        self.inputMultiply_b.setMaxLength(4)
+        self.inputMultiply_b.returnPressed.connect(lambda: self.checkfloatinput(self.inputMultiply_b, -9.9, 9.9))
+        self.inputMultiply_b.editingFinished.connect(lambda: self.checkfloatinput(self.inputMultiply_b, -9.9, 9.9))
         self.horizontalLayout_6.addWidget(self.inputMultiply_b)
         self.gridLayout2_b.addLayout(self.horizontalLayout_6, 2, 1, 1, 1)
 
@@ -642,8 +698,10 @@ class Ui_MainWindow(object):
         self.gridLayout2_b.addWidget(self.pushButtonReverse_b, 3, 1, 1, 1)
         self.verticalLayoutB.addLayout(self.gridLayout2_b)
         self.horizontalLayoutAB.addLayout(self.verticalLayoutB)
-        spacerItem13 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayoutAB.addItem(spacerItem13)
+
+        spacerItem14 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayoutAB.addItem(spacerItem14)
+
         self.verticalLayout.addLayout(self.horizontalLayoutAB)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -654,7 +712,9 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.labelHeaderA.setText(_translate("MainWindow", "Введите матрицу А"))
+        self.labelsubHeaderA.setText(_translate("MainWindow", "Введите числа от -99.9 до 99.9"))
         self.pushButtonMultiply_a.setText(_translate("MainWindow", "Умножить"))
+        self.labelmulvaluelimitA.setText(_translate("MainWindow", "min -9.9\nmax 9.9"))
         self.textSize_a.setText(_translate("MainWindow", "Размер"))
         self.comboBoxSize_a1.setItemText(0, _translate("MainWindow", "1"))
         self.comboBoxSize_a1.setItemText(1, _translate("MainWindow", "2"))
@@ -681,10 +741,12 @@ class Ui_MainWindow(object):
         self.pushButtonRank_a.setText(_translate("MainWindow", "Найти ранг"))
         self.pushButtonReverse_a.setText(_translate("MainWindow", "Обратная матрица"))
         self.pushButtonPower_a.setText(_translate("MainWindow", "Возвести в степень"))
+        self.labelpowvaluelimitA.setText(_translate("MainWindow", " min -9 \n max 9 "))
         self.pushButtonAdd.setText(_translate("MainWindow", "A + B"))
         self.pushButtonSub.setText(_translate("MainWindow", "A - B"))
         self.pushButtonMul.setText(_translate("MainWindow", "A x B"))
         self.labelHeaderB.setText(_translate("MainWindow", "Введите матрицу B"))
+        self.labelsubHeaderB.setText(_translate("MainWindow", "Введите числа от -99.9 до 99.9"))
         self.pushButtonClear_b.setText(_translate("MainWindow", "Очистить"))
         self.textSize_b.setText(_translate("MainWindow", "Размер"))
         self.comboBoxSize_b1.setItemText(0, _translate("MainWindow", "1"))
@@ -708,8 +770,10 @@ class Ui_MainWindow(object):
         self.comboBoxSize_b2.setItemText(8, _translate("MainWindow", "9"))
         self.pushButtonTranspond_b.setText(_translate("MainWindow", "Транспонировать"))
         self.pushButtonPower_b.setText(_translate("MainWindow", "Возвести в степень"))
+        self.labelpowvaluelimitB.setText(_translate("MainWindow", " min -9 \n max 9 "))
         self.pushButtonDeterminant_b.setText(_translate("MainWindow", "Найти определитель"))
         self.pushButtonMultiply_b.setText(_translate("MainWindow", "Умножить"))
+        self.labelmulvaluelimitB.setText(_translate("MainWindow", "min -9.9\nmax 9.9"))
         self.pushButtonRank_b.setText(_translate("MainWindow", "Найти ранг"))
         self.pushButtonReverse_b.setText(_translate("MainWindow", "Обратная матрица"))
 
@@ -719,7 +783,7 @@ class Ui_MainWindow(object):
             self.gridLayout1_b = QtWidgets.QGridLayout()
             self.gridLayout1_b.setObjectName("gridLayout1_b")
             gridlayout = self.gridLayout1_b
-            self.verticalLayoutB.insertLayout(1, self.gridLayout1_b)
+            self.verticalLayoutB.insertLayout(2, self.gridLayout1_b)
             combobox1 = self.comboBoxSize_b1
             combobox2 = self.comboBoxSize_b2
             lst = self.input_b
@@ -729,7 +793,7 @@ class Ui_MainWindow(object):
             self.gridLayout1_a = QtWidgets.QGridLayout()
             self.gridLayout1_a.setObjectName("gridLayout1_a")
             gridlayout = self.gridLayout1_a
-            self.verticalLayoutA.insertLayout(1, self.gridLayout1_a)
+            self.verticalLayoutA.insertLayout(2, self.gridLayout1_a)
             combobox1 = self.comboBoxSize_a1
             combobox2 = self.comboBoxSize_a2
             lst = self.input_a
@@ -758,7 +822,10 @@ class Ui_MainWindow(object):
                 gridlayout.addWidget(lst[i][j], i, j + 1, 1, 1)
                 lst[i][j].clear()
                 lst[i][j].setText("0.0")
-                lst[i][j].textChanged.connect(
+                lst[i][j].setMaxLength(5)
+                lst[i][j].returnPressed.connect(
+                    (functools.partial(self.checkfloatinput, lst[i][j], -99.9, 99.9)))
+                lst[i][j].editingFinished.connect(
                     (functools.partial(self.checkfloatinput, lst[i][j], -99.9, 99.9)))
 
     def checkfloatinput(self, input_: QtWidgets.QLineEdit, minval: float, maxval: float):
@@ -767,15 +834,10 @@ class Ui_MainWindow(object):
                 input_.setText(f"{minval:.1f}")
             elif float(input_.text()) > maxval:
                 input_.setText(f"{maxval:.1f}")
-            elif len(input_.text()) > 5:
-                input_.setText(str(float(input_.text()[:-1])))
-            elif len(input_.text()) > 1 and input_.text()[0] == "0" and input_.text()[1] != ".":
+            else:
                 input_.setText(str(float(input_.text())))
         except ValueError or IndexError:
-            if input_.text() == "":
-                input_.setText("0.0")
-            else:
-                input_.setText(input_.text()[:-1])
+            input_.setText("0.0")
 
     def checkintinput(self, input_: QtWidgets.QLineEdit, minval: int, maxval: int):
         try:
@@ -783,15 +845,10 @@ class Ui_MainWindow(object):
                 input_.setText(f"{minval}")
             elif int(input_.text()) > maxval:
                 input_.setText(f"{maxval}")
-            elif len(input_.text()) > 2:
-                input_.setText(str(int(input_.text()[:-1])))
             else:
                 input_.setText(str(int(input_.text())))
         except ValueError:
-            if input_.text() == "":
-                input_.setText("0")
-            else:
-                input_.setText(input_.text()[:-1])
+            input_.setText("0")
 
 
 class MyMessageBox(QtWidgets.QMessageBox):
