@@ -2,7 +2,6 @@ import functools
 from enum import Enum
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
-import resources
 
 
 class Matrix(Enum):
@@ -24,7 +23,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("Matrix Calculator")
         MainWindow.resize(949, 444)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/img/ui/resources/icon_matrix.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("resources/icon_matrix.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
