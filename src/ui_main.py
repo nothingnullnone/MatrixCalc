@@ -3,6 +3,8 @@ from enum import Enum
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
 
+from src.object_names import ObjNames
+
 
 class Matrix(Enum):
     A = 0
@@ -20,7 +22,7 @@ class MyFont:
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("Matrix Calculator")
+        MainWindow.setObjectName(str(ObjNames.mainWindow.value))
         MainWindow.resize(949, 444)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("resources/icon_matrix.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -42,7 +44,7 @@ class Ui_MainWindow(object):
                                  "\n"
                                  "QLineEdit {\n"
                                  "    background-color: rgb(255, 255, 255);\n"
-                                 "    font: 75 10pt \"Tahoma\";\n"
+                                 "    font: 75 10pt 'Tahoma';\n"
                                  "    color: rgb(0, 0, 0);\n"
                                  "    border-style: solid;\n"
                                  "    border-radius: 5px;\n"
@@ -61,7 +63,7 @@ class Ui_MainWindow(object):
                                  "    border: 2px solid gray;\n"
                                  "    border-radius: 5px;\n"
                                  "    padding: 7px;\n"
-                                 "    font: 75 10pt \"Tahoma\";\n"
+                                 "    font: 75 10pt 'Tahoma';\n"
                                  "    margin: 7px;\n"
                                  "}\n"
                                  "\n"
@@ -90,19 +92,19 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setObjectName(str(ObjNames.centralWidget.value))
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setObjectName(str(ObjNames.verticalLayout.value))
 
         # Основной горизонтальный Layout
         self.horizontalLayoutAB = QtWidgets.QHBoxLayout()
         self.horizontalLayoutAB.setContentsMargins(5, 5, 5, 5)
-        self.horizontalLayoutAB.setObjectName("horizontalLayoutAB")
+        self.horizontalLayoutAB.setObjectName(str(ObjNames.horizontalLayoutAB.value))
 
         spacerItem = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayoutAB.addItem(spacerItem)
         self.verticalLayoutA = QtWidgets.QVBoxLayout()
-        self.verticalLayoutA.setObjectName("verticalLayoutA")
+        self.verticalLayoutA.setObjectName(str(ObjNames.verticalLayoutA.value))
 
         # Заголовок матрицы А
         self.labelHeaderA = QtWidgets.QLabel(self.centralwidget)
@@ -111,16 +113,16 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.labelHeaderA.sizePolicy().hasHeightForWidth())
         self.labelHeaderA.setSizePolicy(sizePolicy)
-        self.labelHeaderA.setStyleSheet("font: 14pt \"Tahoma\";")
+        self.labelHeaderA.setStyleSheet("font: 14pt 'Tahoma';")
         self.labelHeaderA.setAlignment(QtCore.Qt.AlignCenter)
-        self.labelHeaderA.setObjectName("labelHeaderA")
+        self.labelHeaderA.setObjectName(str(ObjNames.labelHeaderA.value))
         self.verticalLayoutA.addWidget(self.labelHeaderA)
 
         # Подзаголовок матрицы А
         self.labelsubHeaderA = QtWidgets.QLabel(self.centralwidget)
         sizePolicy.setHeightForWidth(self.labelsubHeaderA.sizePolicy().hasHeightForWidth())
         self.labelsubHeaderA.setSizePolicy(sizePolicy)
-        self.labelsubHeaderA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelsubHeaderA.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelsubHeaderA.setAlignment(QtCore.Qt.AlignCenter)
         self.labelsubHeaderA.setObjectName("labelsubHeaderA")
         self.verticalLayoutA.addWidget(self.labelsubHeaderA)
@@ -151,7 +153,7 @@ class Ui_MainWindow(object):
 
         # Текст Ограничение значений множителя
         self.labelmulvaluelimitA = QtWidgets.QLabel(self.centralwidget)
-        self.labelmulvaluelimitA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelmulvaluelimitA.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelmulvaluelimitA.setAlignment(QtCore.Qt.AlignCenter)
         self.labelmulvaluelimitA.setObjectName("labelmulvaluelimitA")
         self.horizontalLayout_4.addWidget(self.labelmulvaluelimitA)
@@ -179,8 +181,8 @@ class Ui_MainWindow(object):
         self.inputMultiply_a.clear()
         self.inputMultiply_a.setText("1.0")
         self.inputMultiply_a.setMaxLength(4)
-        self.inputMultiply_a.returnPressed.connect(lambda: self.checkfloatinput(self.inputMultiply_a, -9.9, 9.9))
-        self.inputMultiply_a.editingFinished.connect(lambda: self.checkfloatinput(self.inputMultiply_a, -9.9, 9.9))
+        self.inputMultiply_a.returnPressed.connect(lambda: self.checkFloatInput(self.inputMultiply_a, -9.9, 9.9))
+        self.inputMultiply_a.editingFinished.connect(lambda: self.checkFloatInput(self.inputMultiply_a, -9.9, 9.9))
         self.horizontalLayout_4.addWidget(self.inputMultiply_a)
         self.gridLayout2_a.addLayout(self.horizontalLayout_4, 2, 1, 1, 1)
 
@@ -210,15 +212,8 @@ class Ui_MainWindow(object):
         self.comboBoxSize_a1.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.comboBoxSize_a1.setStyleSheet("")
         self.comboBoxSize_a1.setObjectName("comboBoxSize_a1")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
-        self.comboBoxSize_a1.addItem("")
+        for x in range(9):
+            self.comboBoxSize_a1.addItem("")
         self.comboBoxSize_a1.setCurrentIndex(2)
         self.horizontalLayout.addWidget(self.comboBoxSize_a1)
 
@@ -241,15 +236,8 @@ class Ui_MainWindow(object):
         self.comboBoxSize_a2.setSizePolicy(sizePolicy)
         self.comboBoxSize_a2.setMinimumSize(QtCore.QSize(0, 30))
         self.comboBoxSize_a2.setObjectName("comboBoxSize_a2")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
-        self.comboBoxSize_a2.addItem("")
+        for x in range(9):
+            self.comboBoxSize_a2.addItem("")
         self.comboBoxSize_a2.setCurrentIndex(2)
         self.horizontalLayout.addWidget(self.comboBoxSize_a2)
 
@@ -273,7 +261,7 @@ class Ui_MainWindow(object):
 
         # Отрисовка матрицы A
         self.input_a = []
-        self.redraw_matrix(Matrix.A)
+        self.redrawMatrix(Matrix.A)
 
         # Кнопка Транспонировать
         self.pushButtonTranspond_a = QtWidgets.QPushButton(self.centralwidget)
@@ -349,7 +337,7 @@ class Ui_MainWindow(object):
 
         # Текст Ограничение значений множителя
         self.labelpowvaluelimitA = QtWidgets.QLabel(self.centralwidget)
-        self.labelpowvaluelimitA.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelpowvaluelimitA.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelpowvaluelimitA.setAlignment(QtCore.Qt.AlignCenter)
         self.labelpowvaluelimitA.setObjectName("labelpowvaluelimitA")
         self.horizontalLayout_2.addWidget(self.labelpowvaluelimitA)
@@ -381,8 +369,8 @@ class Ui_MainWindow(object):
         self.inputPower_a.clear()
         self.inputPower_a.setText("1")
         self.inputPower_a.setMaxLength(2)
-        self.inputPower_a.returnPressed.connect(lambda: self.checkintinput(self.inputPower_a, -9, 9))
-        self.inputPower_a.editingFinished.connect(lambda: self.checkintinput(self.inputPower_a, -9, 9))
+        self.inputPower_a.returnPressed.connect(lambda: self.checkIntInput(self.inputPower_a, -9, 9))
+        self.inputPower_a.editingFinished.connect(lambda: self.checkIntInput(self.inputPower_a, -9, 9))
         self.gridLayout2_a.addLayout(self.horizontalLayout_2, 1, 1, 1, 1)
         self.verticalLayoutA.addLayout(self.gridLayout2_a)
         self.horizontalLayoutAB.addLayout(self.verticalLayoutA)
@@ -428,7 +416,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.labelHeaderB.sizePolicy().hasHeightForWidth())
         self.labelHeaderB.setSizePolicy(sizePolicy)
-        self.labelHeaderB.setStyleSheet("font: 14pt \"Tahoma\";")
+        self.labelHeaderB.setStyleSheet("font: 14pt 'Tahoma';")
         self.labelHeaderB.setAlignment(QtCore.Qt.AlignCenter)
         self.labelHeaderB.setObjectName("labelHeaderB")
         self.verticalLayoutB.addWidget(self.labelHeaderB)
@@ -437,7 +425,7 @@ class Ui_MainWindow(object):
         self.labelsubHeaderB = QtWidgets.QLabel(self.centralwidget)
         sizePolicy.setHeightForWidth(self.labelsubHeaderA.sizePolicy().hasHeightForWidth())
         self.labelsubHeaderB.setSizePolicy(sizePolicy)
-        self.labelsubHeaderB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelsubHeaderB.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelsubHeaderB.setAlignment(QtCore.Qt.AlignCenter)
         self.labelsubHeaderB.setObjectName("labelsubHeaderB")
         self.verticalLayoutB.addWidget(self.labelsubHeaderB)
@@ -483,15 +471,8 @@ class Ui_MainWindow(object):
         self.comboBoxSize_b1.setSizePolicy(sizePolicy)
         self.comboBoxSize_b1.setMinimumSize(QtCore.QSize(0, 30))
         self.comboBoxSize_b1.setObjectName("comboBoxSize_b1")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
-        self.comboBoxSize_b1.addItem("")
+        for x in range(9):
+            self.comboBoxSize_b1.addItem("")
         self.comboBoxSize_b1.setCurrentIndex(2)
         self.horizontalLayout_3.addWidget(self.comboBoxSize_b1)
 
@@ -514,15 +495,8 @@ class Ui_MainWindow(object):
         self.comboBoxSize_b2.setSizePolicy(sizePolicy)
         self.comboBoxSize_b2.setMinimumSize(QtCore.QSize(0, 30))
         self.comboBoxSize_b2.setObjectName("comboBoxSize_b2")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
-        self.comboBoxSize_b2.addItem("")
+        for x in range(9):
+            self.comboBoxSize_b2.addItem("")
         self.comboBoxSize_b2.setCurrentIndex(2)
         self.horizontalLayout_3.addWidget(self.comboBoxSize_b2)
         self.horizontalLayout_3.setStretch(0, 1)
@@ -532,7 +506,7 @@ class Ui_MainWindow(object):
 
         # Отрисовка матрицы B
         self.input_b = []
-        self.redraw_matrix(Matrix.B)
+        self.redrawMatrix(Matrix.B)
 
         # Кнопка Транспонировать
         self.pushButtonTranspond_b = QtWidgets.QPushButton(self.centralwidget)
@@ -569,7 +543,7 @@ class Ui_MainWindow(object):
 
         # Текст Ограничение значений показателя степени
         self.labelpowvaluelimitB = QtWidgets.QLabel(self.centralwidget)
-        self.labelpowvaluelimitB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelpowvaluelimitB.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelpowvaluelimitB.setAlignment(QtCore.Qt.AlignCenter)
         self.labelpowvaluelimitB.setObjectName("labelpowvaluelimitB")
         self.horizontalLayout_5.addWidget(self.labelpowvaluelimitB)
@@ -597,8 +571,8 @@ class Ui_MainWindow(object):
         self.inputPower_b.clear()
         self.inputPower_b.setText("1")
         self.inputPower_b.setMaxLength(2)
-        self.inputPower_b.returnPressed.connect(lambda: self.checkintinput(self.inputPower_b, -9, 9))
-        self.inputPower_b.editingFinished.connect(lambda: self.checkintinput(self.inputPower_b, -9, 9))
+        self.inputPower_b.returnPressed.connect(lambda: self.checkIntInput(self.inputPower_b, -9, 9))
+        self.inputPower_b.editingFinished.connect(lambda: self.checkIntInput(self.inputPower_b, -9, 9))
         self.horizontalLayout_5.addWidget(self.inputPower_b)
         self.gridLayout2_b.addLayout(self.horizontalLayout_5, 1, 1, 1, 1)
 
@@ -637,7 +611,7 @@ class Ui_MainWindow(object):
 
         # Текст Ограничение значений показателя степени
         self.labelmulvaluelimitB = QtWidgets.QLabel(self.centralwidget)
-        self.labelmulvaluelimitB.setStyleSheet("font: 10pt \"Tahoma\";")
+        self.labelmulvaluelimitB.setStyleSheet("font: 10pt 'Tahoma';")
         self.labelmulvaluelimitB.setAlignment(QtCore.Qt.AlignCenter)
         self.labelmulvaluelimitB.setObjectName("labelmulvaluelimitB")
         self.horizontalLayout_6.addWidget(self.labelmulvaluelimitB)
@@ -665,8 +639,8 @@ class Ui_MainWindow(object):
         self.inputMultiply_b.clear()
         self.inputMultiply_b.setText("1.0")
         self.inputMultiply_b.setMaxLength(4)
-        self.inputMultiply_b.returnPressed.connect(lambda: self.checkfloatinput(self.inputMultiply_b, -9.9, 9.9))
-        self.inputMultiply_b.editingFinished.connect(lambda: self.checkfloatinput(self.inputMultiply_b, -9.9, 9.9))
+        self.inputMultiply_b.returnPressed.connect(lambda: self.checkFloatInput(self.inputMultiply_b, -9.9, 9.9))
+        self.inputMultiply_b.editingFinished.connect(lambda: self.checkFloatInput(self.inputMultiply_b, -9.9, 9.9))
         self.horizontalLayout_6.addWidget(self.inputMultiply_b)
         self.gridLayout2_b.addLayout(self.horizontalLayout_6, 2, 1, 1, 1)
 
@@ -776,7 +750,7 @@ class Ui_MainWindow(object):
         self.pushButtonRank_b.setText(_translate("MainWindow", "Найти ранг"))
         self.pushButtonReverse_b.setText(_translate("MainWindow", "Обратная матрица"))
 
-    def redraw_matrix(self, m: Matrix):
+    def redrawMatrix(self, m: Matrix):
         if m.value == 1:
             # Сетка Layout
             self.gridLayout1_b = QtWidgets.QGridLayout()
@@ -823,27 +797,27 @@ class Ui_MainWindow(object):
                 lst[i][j].setText("0.0")
                 lst[i][j].setMaxLength(5)
                 lst[i][j].returnPressed.connect(
-                    (functools.partial(self.checkfloatinput, lst[i][j], -99.9, 99.9)))
+                    (functools.partial(self.checkFloatInput, lst[i][j], -99.9, 99.9)))
                 lst[i][j].editingFinished.connect(
-                    (functools.partial(self.checkfloatinput, lst[i][j], -99.9, 99.9)))
+                    (functools.partial(self.checkFloatInput, lst[i][j], -99.9, 99.9)))
 
-    def checkfloatinput(self, input_: QtWidgets.QLineEdit, minval: float, maxval: float):
+    def checkFloatInput(self, input_: QtWidgets.QLineEdit, minVal: float, maxVal: float):
         try:
-            if float(input_.text()) < minval:
-                input_.setText(f"{minval:.1f}")
-            elif float(input_.text()) > maxval:
-                input_.setText(f"{maxval:.1f}")
+            if float(input_.text()) < minVal:
+                input_.setText(f"{minVal:.1f}")
+            elif float(input_.text()) > maxVal:
+                input_.setText(f"{maxVal:.1f}")
             else:
                 input_.setText(str(float(input_.text())))
         except ValueError or IndexError:
             input_.setText("0.0")
 
-    def checkintinput(self, input_: QtWidgets.QLineEdit, minval: int, maxval: int):
+    def checkIntInput(self, input_: QtWidgets.QLineEdit, minVal: int, maxVal: int):
         try:
-            if int(input_.text()) < minval:
-                input_.setText(f"{minval}")
-            elif int(input_.text()) > maxval:
-                input_.setText(f"{maxval}")
+            if int(input_.text()) < minVal:
+                input_.setText(f"{minVal}")
+            elif int(input_.text()) > maxVal:
+                input_.setText(f"{maxVal}")
             else:
                 input_.setText(str(int(input_.text())))
         except ValueError:
@@ -851,7 +825,9 @@ class Ui_MainWindow(object):
 
 
 class MyMessageBox(QtWidgets.QMessageBox):
-    def __init__(self, result: list = []):
+    def __init__(self, result=None):
+        if result is None:
+            result = []
         self.rows = len(result) if isinstance(result, list) else 0
         self.columns = len(result[0]) if isinstance(result, list) else 0
         self.rnd = lambda x: str(float(f"{x:.10f}")) if abs(float(f"{x}") - float(f"{x:.10f}")) < 1e-10 else str(

@@ -74,7 +74,7 @@ class MatrixCalc(QtWidgets.QMainWindow):
                 grid.removeWidget(input_[i][j])
                 input_[i][j].deleteLater()
                 grid.deleteLater()
-        self.ui.redraw_matrix(m)
+        self.ui.redrawMatrix(m)
 
     def read_matrix(self, m: Matrix) -> list:
         match m.value:
