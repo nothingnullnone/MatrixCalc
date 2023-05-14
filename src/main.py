@@ -13,32 +13,32 @@ class MatrixCalc(QtWidgets.QMainWindow):
 
         self.setWindowTitle("Калькулятор матриц")
 
-        self.ui.comboBoxSize_a1.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.A))
-        self.ui.comboBoxSize_a2.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.A))
+        self.ui.comboBoxSizeA1.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.A))
+        self.ui.comboBoxSizeA2.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.A))
 
-        self.ui.comboBoxSize_b1.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.B))
-        self.ui.comboBoxSize_b2.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.B))
+        self.ui.comboBoxSizeB1.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.B))
+        self.ui.comboBoxSizeB2.currentIndexChanged.connect(lambda: self.redraw_matrix(Matrix.B))
 
-        self.ui.pushButtonClear_a.clicked.connect(lambda: self.clear_matrix(Matrix.A))
-        self.ui.pushButtonClear_b.clicked.connect(lambda: self.clear_matrix(Matrix.B))
+        self.ui.pushButtonClearA.clicked.connect(lambda: self.clear_matrix(Matrix.A))
+        self.ui.pushButtonClearB.clicked.connect(lambda: self.clear_matrix(Matrix.B))
 
-        self.ui.pushButtonTranspond_a.clicked.connect(lambda: self.transponse_matrix(Matrix.A))
-        self.ui.pushButtonTranspond_b.clicked.connect(lambda: self.transponse_matrix(Matrix.B))
+        self.ui.pushButtonTransposeA.clicked.connect(lambda: self.transponse_matrix(Matrix.A))
+        self.ui.pushButtonTransposeB.clicked.connect(lambda: self.transponse_matrix(Matrix.B))
 
-        self.ui.pushButtonMultiply_a.clicked.connect(lambda: self.scalarmul_matrix(Matrix.A))
-        self.ui.pushButtonMultiply_b.clicked.connect(lambda: self.scalarmul_matrix(Matrix.B))
+        self.ui.pushButtonMultiplyA.clicked.connect(lambda: self.scalarMulMatrix(Matrix.A))
+        self.ui.pushButtonMultiplyB.clicked.connect(lambda: self.scalarMulMatrix(Matrix.B))
 
-        self.ui.pushButtonPower_a.clicked.connect(lambda: self.power_matrix(Matrix.A))
-        self.ui.pushButtonPower_b.clicked.connect(lambda: self.power_matrix(Matrix.B))
+        self.ui.pushButtonPowerA.clicked.connect(lambda: self.power_matrix(Matrix.A))
+        self.ui.pushButtonPowerB.clicked.connect(lambda: self.power_matrix(Matrix.B))
 
-        self.ui.pushButtonDeterminant_a.clicked.connect(lambda: self.determine_matrix(Matrix.A))
-        self.ui.pushButtonDeterminant_b.clicked.connect(lambda: self.determine_matrix(Matrix.B))
+        self.ui.pushButtonDeterminantA.clicked.connect(lambda: self.determine_matrix(Matrix.A))
+        self.ui.pushButtonDeterminantB.clicked.connect(lambda: self.determine_matrix(Matrix.B))
 
-        self.ui.pushButtonRank_a.clicked.connect(lambda: self.rank_matrix(Matrix.A))
-        self.ui.pushButtonRank_b.clicked.connect(lambda: self.rank_matrix(Matrix.B))
+        self.ui.pushButtonRankA.clicked.connect(lambda: self.rank_matrix(Matrix.A))
+        self.ui.pushButtonRankB.clicked.connect(lambda: self.rank_matrix(Matrix.B))
 
-        self.ui.pushButtonReverse_a.clicked.connect(lambda: self.invert_matrix(Matrix.A))
-        self.ui.pushButtonReverse_b.clicked.connect(lambda: self.invert_matrix(Matrix.B))
+        self.ui.pushButtonReverseA.clicked.connect(lambda: self.invert_matrix(Matrix.A))
+        self.ui.pushButtonReverseB.clicked.connect(lambda: self.invert_matrix(Matrix.B))
 
         self.ui.pushButtonAdd.clicked.connect(lambda: self.add_matrix(Matrix.A, Matrix.B))
         self.ui.pushButtonSub.clicked.connect(lambda: self.sub_matrix(Matrix.A, Matrix.B))
@@ -47,26 +47,26 @@ class MatrixCalc(QtWidgets.QMainWindow):
     def clear_matrix(self, m: Matrix) -> None:
         match m.value:
             case 0:
-                for i in range(len(self.ui.input_a)):
-                    for j in range(len(self.ui.input_a[0])):
-                        self.ui.input_a[i][j].clear()
-                        self.ui.input_a[i][j].setText("0")
+                for i in range(len(self.ui.inputA)):
+                    for j in range(len(self.ui.inputA[0])):
+                        self.ui.inputA[i][j].clear()
+                        self.ui.inputA[i][j].setText(str(0))
             case 1:
-                for i in range(len(self.ui.input_b)):
-                    for j in range(len(self.ui.input_b[0])):
-                        self.ui.input_b[i][j].clear()
-                        self.ui.input_b[i][j].setText("0")
+                for i in range(len(self.ui.inputB)):
+                    for j in range(len(self.ui.inputB[0])):
+                        self.ui.inputB[i][j].clear()
+                        self.ui.inputB[i][j].setText(str(0))
             case _:
                 pass
 
     def redraw_matrix(self, m: Matrix) -> None:
         match m.value:
             case 0:
-                input_ = self.ui.input_a
-                grid = self.ui.gridLayout1_a
+                input_ = self.ui.inputA
+                grid = self.ui.gridLayout1A
             case 1:
-                input_ = self.ui.input_b
-                grid = self.ui.gridLayout1_b
+                input_ = self.ui.inputB
+                grid = self.ui.gridLayout1B
             case _:
                 return
         for i in range(len(input_)):
@@ -79,11 +79,11 @@ class MatrixCalc(QtWidgets.QMainWindow):
     def read_matrix(self, m: Matrix) -> list:
         match m.value:
             case 0:
-                input_ = self.ui.input_a
+                input_ = self.ui.inputA
             case 1:
-                input_ = self.ui.input_b
+                input_ = self.ui.inputB
             case _:
-                input_ = self.ui.input_a
+                input_ = self.ui.inputA
         matrix = []
         for i in range(len(input_)):
             lst = []
@@ -101,12 +101,12 @@ class MatrixCalc(QtWidgets.QMainWindow):
     def rank_matrix(self, m: Matrix) -> None:
         self.show_result(rank(self.read_matrix(m)))
 
-    def scalarmul_matrix(self, m: Matrix) -> None:
+    def scalarMulMatrix(self, m: Matrix) -> None:
         match m.value:
             case 0:
-                n = float(self.ui.inputMultiply_a.text())
+                n = float(self.ui.inputMultiplyA.text())
             case 1:
-                n = float(self.ui.inputMultiply_b.text())
+                n = float(self.ui.inputMultiplyB.text())
             case _:
                 n = 1
         self.show_result(scalarmul(self.read_matrix(m), n))
@@ -114,9 +114,9 @@ class MatrixCalc(QtWidgets.QMainWindow):
     def power_matrix(self, m: Matrix) -> None:
         match m.value:
             case 0:
-                n = int(self.ui.inputPower_a.text())
+                n = int(self.ui.inputPowerA.text())
             case 1:
-                n = int(self.ui.inputPower_b.text())
+                n = int(self.ui.inputPowerB.text())
             case _:
                 n = 1
         self.show_result(power(self.read_matrix(m), n))
