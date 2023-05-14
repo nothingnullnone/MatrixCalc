@@ -1,4 +1,5 @@
 venv*
 venv\Lib*
 .idea
+main.onefile-build*
 __pycache__
